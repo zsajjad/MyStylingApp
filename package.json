@@ -10,7 +10,9 @@
     "react": "16.6.3",
     "react-native": "0.58.6",
     "react-native-fritz": "https://github.com/zsajjad/react-native-fritz",
-    "react-native-image-picker": "^0.28.0"
+    "react-native-image-picker": "^0.28.0",
+    "react-native-linear-gradient": "^2.5.3",
+    "react-native-permissions": "^2.0.0-alpha.1"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",

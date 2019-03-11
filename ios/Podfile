@@ -1,16 +1,40 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'MyStylingApp' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # Pods for MyStylingApp
+  # Linking React Native for Pods Projects
+  rn_path = '../node_modules/react-native'
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'CxxBridge',
+    'RCTWebSocket'
+  ]
 
-  target 'MyStylingApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # Third party deps podspec link
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  
+  # Pods for MyStylingApp
+  pod 'Fritz', '~> 3.0'
+  pod 'Fritz/VisionStyleModel/Paintings'
+
+  pod 'RNFritz', path: '../node_modules/react-native-fritz/ios'
+  # pod 'ReactNativePermissions', path: '../node_modules/react-native-permissions'
+  pod 'react-native-image-picker', path: '../node_modules/react-native-image-picker'
 
   target 'MyStylingAppTests' do
     inherit! :search_paths
@@ -30,4 +54,12 @@ target 'MyStylingApp-tvOS' do
     # Pods for testing
   end
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 end
