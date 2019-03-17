@@ -20,7 +20,7 @@ target 'MyStylingApp' do
     'RCTText',
     'RCTVibration',
     'CxxBridge',
-    'RCTWebSocket'
+    'RCTWebSocket',
   ]
 
   # Third party deps podspec link
@@ -33,8 +33,12 @@ target 'MyStylingApp' do
   pod 'Fritz/VisionStyleModel/Paintings'
 
   pod 'RNFritz', path: '../node_modules/react-native-fritz/ios'
-  # pod 'ReactNativePermissions', path: '../node_modules/react-native-permissions'
   pod 'react-native-image-picker', path: '../node_modules/react-native-image-picker'
+  pod 'ReactNativePermissions', path: "../node_modules/react-native-permissions"
+  pod 'BVLinearGradient', path: "../node_modules/react-native-linear-gradient"
+  pod 'RNVectorIcons', path: "../node_modules/react-native-vector-icons"
+  pod 'RNGestureHandler', path: "../node_modules/react-native-gesture-handler"
+  pod 'RNScreens', path: "../node_modules/react-native-screens"
 
   target 'MyStylingAppTests' do
     inherit! :search_paths
