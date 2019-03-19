@@ -41,7 +41,7 @@ const colors = {
 
   overlayBlack: 'rgba(0, 0, 0, 0.5)',
   translucentBlack: 'rgba(0, 0, 0, 0.8)',
-  translucentWhite: 'rgba(255, 255, 255, 0.95)',
+  translucentWhite: 'rgba(255, 255, 255, 0.8)',
   rippleColor: '#AAAAAA',
 
   errorBackground: '#812000',

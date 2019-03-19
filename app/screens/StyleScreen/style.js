@@ -10,9 +10,19 @@ import Colors from 'theme/Colors';
 import Dimensions from 'theme/Dimensions';
 
 const style = StyleSheet.create({
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.accentColorReverse,
+    ...StyleSheet.absoluteFillObject,
+  },
   imageBackground: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: Colors.accentColorReverse,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageBackgroundLoading: {
+    opacity: 0.5,
   },
   modelsList: {
     width: '100%',
@@ -21,6 +31,7 @@ const style = StyleSheet.create({
   },
   modelsListContentContainer: {
     paddingHorizontal: Dimensions.space3x,
+    paddingBottom: Dimensions.space2x,
   },
   container: {
     flex: 1,

@@ -3,14 +3,15 @@
  * StyleScreen
  *
  */
-import React, { useReducer, useEffect } from 'react';
+import React, { useRef, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import { View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, View } from 'react-native';
+// import {  } from 'react-native-gesture-handler';
 
 import { Warn } from 'platform/Logger';
 
 import Image from 'components/Image';
+import Loader from 'components/Loader';
 import Screen from 'components/Screen';
 import ModelListItem from 'components/ModelListItem';
 import FormattedMessage from 'components/FormattedMessage';
@@ -26,6 +27,7 @@ import style from './style';
 const MODELS = getModelsList();
 
 function StyleScreen(screenProps) {
+  const list = useRef(null);
   const defaultImage = screenProps.navigation.state.params.imagePath;
   const [{ selectedModelName, images }, dispatch] = useReducer(
     reducer,
@@ -52,7 +54,7 @@ function StyleScreen(screenProps) {
         Warn(error);
       });
   }, [selectedModelName]);
-
+  const imageLoading = selectedModelName && !images[selectedModelName];
   return (
     <Screen
       navigation={screenProps.navigation}
@@ -62,27 +64,47 @@ function StyleScreen(screenProps) {
       testID="styleScreen"
       wrapInScroll={false}
     >
-      <Image
-        style={style.imageBackground}
-        background
-        resizeMode="contain"
-        uri={
-          selectedModelName && images[selectedModelName]
-            ? images[selectedModelName]
-            : defaultImage
-        }
-      />
+      <View style={style.contentContainer}>
+        <Image
+          style={[
+            style.imageBackground,
+            imageLoading ? style.imageBackgroundLoading : {},
+          ]}
+          background
+          resizeMode="contain"
+          uri={
+            selectedModelName && images[selectedModelName]
+              ? images[selectedModelName]
+              : defaultImage
+          }
+        />
+        {imageLoading ? <Loader /> : null}
+      </View>
       <FlatList
         horizontal
         keyExtractor={(item) => item.name}
-        data={MODELS}
+        data={[
+          {
+            title: 'None',
+            name: '',
+          },
+          ...MODELS,
+        ]}
         style={style.modelsList}
+        ref={list}
+        extraData={selectedModelName}
         contentContainerStyle={style.modelsListContentContainer}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <ModelListItem
             model={item}
             active={item.name === selectedModelName}
-            onPress={() => dispatch(actions.setSelectedModel(item.name))}
+            onPress={() => {
+              dispatch(actions.setSelectedModel(item.name));
+              list.current.scrollToIndex({
+                index,
+                viewPosition: 0.5,
+              });
+            }}
           />
         )}
       />

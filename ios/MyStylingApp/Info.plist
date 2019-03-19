@@ -43,6 +43,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow us to access your photos. This app does not upload any of your photos anywhere. Its all on your phone</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Feather.ttf</string>

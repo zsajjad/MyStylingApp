@@ -39,6 +39,7 @@ target 'MyStylingApp' do
   pod 'RNVectorIcons', path: "../node_modules/react-native-vector-icons"
   pod 'RNGestureHandler', path: "../node_modules/react-native-gesture-handler"
   pod 'RNScreens', path: "../node_modules/react-native-screens"
+  # pod 'RNReanimated', path: "../node_modules/react-native-reanimated"
 
   target 'MyStylingAppTests' do
     inherit! :search_paths
